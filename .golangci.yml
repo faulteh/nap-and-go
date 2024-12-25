@@ -1,0 +1,30 @@
+run:
+  timeout: 5m
+  tests: true
+
+output:
+  # Use the updated format configuration
+  formats:
+    - format: colored-line-number
+      path: stdout
+
+linters-settings:
+  errcheck:
+    exclude-functions:
+      - fmt.Printf
+
+  revive:
+    config: ./revive.toml
+
+linters:
+  enable:
+    - revive
+    - unused
+    - staticcheck
+    - gosimple
+    - govet
+    - errcheck
+  enable-all: false
+
+issues:
+  exclude-use-default: false

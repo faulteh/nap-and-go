@@ -1,0 +1,19 @@
+# Output format
+format = "friendly"
+
+# Rules configuration
+[rule]
+name = "indent-error-flow"
+enabled = true
+severity = "warning"
+
+[rule]
+name = "error-strings"
+enabled = true
+severity = "warning"
+arguments = ["lowercase"]
+
+# Exclusions
+[exclude]
+files = ["**/*.pb.go"]
+directories = ["vendor"]
