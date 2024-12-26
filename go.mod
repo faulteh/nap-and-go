@@ -2,11 +2,28 @@ module github.com/faulteh/nap-and-go
 
 go 1.23.4
 
-require rsc.io/quote v1.5.2
+require (
+	gorm.io/driver/postgres v1.5.11
+	gorm.io/gorm v1.25.12
+)
 
 require (
-	golang.org/x/text v0.0.0-20170915032832-14c0d48ead0c // indirect
-	rsc.io/sampler v1.3.0 // indirect
+	github.com/bwmarrin/discordgo v0.28.1 // indirect
+	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
+	github.com/jackc/pgx/v5 v5.7.2 // indirect
+	github.com/jackc/puddle/v2 v2.2.2 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 )
 
 replace github.com/faulteh/nap-and-go/pkg => ./pkg
+
+replace github.com/faulteh/nap-and-go/config => ./config
+
+replace github.com/faulteh/nap-and-go/db => ./db

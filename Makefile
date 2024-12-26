@@ -6,6 +6,7 @@ DOCKER_COMPOSE_FILE=docker-compose.yaml
 # Go build parameters
 GO_BUILD_CMD=go build
 GO_FILES=./...
+CGO_ENABLED=0
 
 # Targets
 .PHONY: all build bot web run lint test clean docker docker-compose up down info
@@ -18,7 +19,7 @@ build: bot
 
 # Build the Discord bot binary
 bot:
-	$(GO_BUILD_CMD) -o bin/bot ./cmd/bot
+	CGO_ENABLED=$(CGO_ENABLED) $(GO_BUILD_CMD) -o bin/bot ./cmd/bot
 
 # Build the web interface binary
 web:
