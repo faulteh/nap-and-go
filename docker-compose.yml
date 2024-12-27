@@ -11,7 +11,7 @@ services:
     env_file:
       - path: ./.env
     volumes:
-      - ./bin:/app/bin
+      - .:/app
     # command: ["./bin/bot"]
     # For development we just run air
     command: ["air", "-c", ".air-bot.toml"]
@@ -28,7 +28,9 @@ services:
     env_file:
       - path: ./.env
     volumes:
-      - ./bin:/app/bin
+      - .:/app
+    ports:
+      - "8080:8080"
     # command: ["./bin/web"]
     # For development we just run air
     command: ["air"]

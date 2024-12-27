@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    /* Custom Dark Mode */
+    body {
+      background-color: #121212;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 8px;
+      background-color: #1e1e1e;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-container h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .discord-button {
+      background-color: #5865F2;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .discord-button:hover {
+      background-color: #4752c4;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Welcome</h1>
+    <p>Please log in to continue.</p>
+    <a href="/auth/login" class="button discord-button">Login with Discord</a>
+  </div>
+</body>
+</html>

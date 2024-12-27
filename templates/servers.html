@@ -1,0 +1,12 @@
+{{ template "header.html" . }}
+{{ if .Servers }}
+<h2>Your Servers</h2>
+<ul>
+    {{ range .Servers }}
+    <li>{{ .Name }}</li>
+    {{ end }}
+</ul>
+{{ else }}
+<p>You are not in any servers.</p>
+{{ end }}
+{{ template "footer.html" }}
