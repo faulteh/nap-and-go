@@ -3,20 +3,35 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev
     container_name: bot
     depends_on:
       - postgres
-    environment:
-      - DB_HOST=postgres
-      - DB_PORT=5432
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
-      - DB_SSLMODE=disable
+    # Get environment variables from .env file
+    env_file:
+      - path: ./.env
     volumes:
       - ./bin:/app/bin
-    command: ["sh", "-c", "while :; do sleep infinity; done"]
     # command: ["./bin/bot"]
+    # For development we just run air
+    command: ["air", "-c", ".air-bot.toml"]
+    restart: always
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: web
+    depends_on:
+      - bot
+    env_file:
+      - path: ./.env
+    volumes:
+      - ./bin:/app/bin
+    # command: ["./bin/web"]
+    # For development we just run air
+    command: ["air"]
     restart: always
 
   postgres:

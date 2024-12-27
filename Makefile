@@ -23,7 +23,7 @@ bot:
 
 # Build the web interface binary
 web:
-	$(GO_BUILD_CMD) -o bin/web ./cmd/web
+	CGO_ENABLED=$(CGO_ENABLED) $(GO_BUILD_CMD) -o bin/web ./cmd/web
 
 # Run both bot and web
 run: build

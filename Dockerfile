@@ -4,6 +4,10 @@ FROM golang:1.23-alpine AS builder
 # Install dependencies required to run the Makefile
 RUN apk add --no-cache make
 
+# Set up Go environment variables
+ENV GOPATH=/golang
+ENV PATH=$GOPATH/bin:$PATH
+
 # Set the working directory
 WORKDIR /app
 
@@ -14,7 +18,7 @@ COPY . .
 RUN make build
 
 # Use a minimal base image for the final container
-FROM alpine:latest
+FROM alpine:latest AS deploy
 
 # Set the working directory
 WORKDIR /app
@@ -26,6 +30,9 @@ RUN apk add --no-cache ca-certificates
 COPY --from=builder /app/bin/bot /app/bin/bot
 
 # Set environment variables for database connection
+ENV GOPATH=/golang
+ENV PATH=$GOPATH/bin:$PATH
+
 ENV DB_HOST=postgres
 ENV DB_PORT=5432
 ENV DB_USER=napandgo
@@ -36,5 +43,24 @@ ENV DB_SSLMODE=disable
 # Expose any required ports (optional)
 EXPOSE 8080
 
+# Run the container as a non-root user
+USER nobody
+
 # Run the bot binary
 CMD ["/app/bin/bot"]
+
+# Development image we actually use go so we can use hot reloading with air
+FROM builder AS dev
+
+# Install air for Go for hot reloading
+RUN apk add --no-cache git
+RUN go install github.com/air-verse/air@latest
+
+# Expose any required ports (optional)
+EXPOSE 8080
+
+# Run the container as a non-root user
+USER root
+
+# Run the bot binary
+CMD ["air", "-c", ".air-bot.toml"]
