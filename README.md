@@ -56,3 +56,6 @@ docker compose logs -f
 - models -- database models
 - static -- web UI static files
 - templates -- web UI templates
+- discordtypes -- structs used by db and discordapi to populate data
+- discordapi -- functions that do useful things with the discord REST API
+

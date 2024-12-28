@@ -54,5 +54,7 @@ require (
 )
 
 replace github.com/faulteh/nap-and-go/config => ./config
-
 replace github.com/faulteh/nap-and-go/db => ./db
+replace github.com/faulteh/nap-and-go/models => ./models
+replace github.com/faulteh/nap-and-go/discordapi => ./discordapi
+replace github.com/faulteh/nap-and-go/discordtypes => ./discordtypes

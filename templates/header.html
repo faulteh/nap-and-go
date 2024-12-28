@@ -1,43 +1,97 @@
-{{ define "header.html"}}
+{{ define "header.html" }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <style>
+        /* Dark mode styling */
+        /* Dark mode styling */
         body {
-            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            height: 100%;
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
+        .navbar, .sidebar {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            height: 100%;
         }
-        nav a {
-            color: white;
-            margin: 0 10px;
-            text-decoration: none;
+        .columns {
+            height: calc(100vh - 52px); /* Subtract the height of the navbar */
         }
-        .container {
+        .navbar a.navbar-item,
+        .sidebar .menu-list a {
+            color: #e0e0e0;
+        }
+        .navbar a.navbar-item:hover,
+        .sidebar .menu-list a:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .content {
             padding: 20px;
+            background-color: #181818;
+            border-radius: 8px;
+            height: 100%;
+            overflow-y: auto;
         }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #777;
+        .menu-label {
+            color: #bbbbbb;
+        }
+        .buttons .button.is-light {
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+        .buttons .button.is-light:hover {
+            background-color: #444444;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>{{ .Title }}</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/logout">Logout</a>
-        </nav>
-    </header>
-    <div class="container">
+    <!-- Header -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <strong>Nap-and-Go</strong>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">Home</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-light" href="/logout">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="columns is-gapless">
+        <!-- Sidebar -->
+        <aside class="column is-2 sidebar">
+            <p class="menu-label">Navigation</p>
+            <ul class="menu-list">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/servers">Server List</a></li>
+            </ul>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="column content">
 {{ end }}

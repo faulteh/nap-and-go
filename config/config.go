@@ -22,7 +22,7 @@ type DBConfig struct {
 type DiscordConfig struct {
 	clientID     string
 	clientSecret string
-	botToken     string
+	BotToken     string
 	redirectURL  string
 }
 
@@ -64,7 +64,7 @@ func LoadDiscordConfig() *DiscordConfig {
 	return &DiscordConfig{
 		clientID:     getEnv("DISCORD_CLIENT_ID", ""),
 		clientSecret: getEnv("DISCORD_CLIENT_SECRET", ""),
-		botToken:     getEnv("DISCORD_BOT_TOKEN", ""),
+		BotToken:     getEnv("DISCORD_BOT_TOKEN", ""),
 		redirectURL:  getEnv("DISCORD_REDIRECT_URL", ""),
 	}
 }

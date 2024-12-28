@@ -1,12 +1,148 @@
-{{ template "header.html" . }}
-{{ if .Servers }}
-<h2>Your Servers</h2>
-<ul>
-    {{ range .Servers }}
-    <li>{{ .Name }}</li>
-    {{ end }}
-</ul>
-{{ else }}
-<p>You are not in any servers.</p>
-{{ end }}
-{{ template "footer.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        /* Dark mode styling */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar, .sidebar {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            height: 100%;
+        }
+        .columns {
+            height: calc(100vh - 52px); /* Subtract the height of the navbar */
+        }
+        .navbar a.navbar-item,
+        .sidebar .menu-list a {
+            color: #e0e0e0;
+        }
+        .navbar a.navbar-item:hover,
+        .sidebar .menu-list a:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .content {
+            padding: 20px;
+            background-color: #181818;
+            border-radius: 8px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .menu-label {
+            color: #bbbbbb;
+        }
+        .buttons .button.is-light {
+            background-color: #333333;
+            color: #e0e0e0;
+        }
+        .buttons .button.is-light:hover {
+            background-color: #444444;
+            color: #ffffff;
+        }
+
+        .server-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the list horizontally */
+        }
+        .server-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 10px 15px;
+            width: 90%; /* Set width to avoid full expansion */
+            max-width: 600px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .server-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .server-item a {
+            color: #e0e0e0;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .server-item a:hover {
+            color: #ffffff;
+        }
+        .server-item .no-bot {
+            color: #bbbbbb;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                <strong>Nap-and-Go</strong>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/">Home</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-light" href="/logout">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="columns is-gapless">
+
+        <!-- Content Area -->
+        <main class="column content">
+            <h2 class="title has-text-centered">Your Servers</h2>
+
+            {{ if .UserServers }}
+            <ul class="server-list">
+                {{ range .UserServers }}
+                <li class="server-item">
+                    {{ if .Icon }}
+                        <img src="https://cdn.discordapp.com/icons/{{ .ID }}/{{ .Icon }}.png" alt="Server Icon">
+                    {{ end }}
+                    {{ if .HasBot }}
+                        <a href="/servers/{{ .ID }}">{{ .Name }}</a>
+                    {{ else }}
+                        <span class="no-bot">{{ .Name }}</span>
+                    {{ end }}
+                </li>
+                {{ end }}
+            </ul>
+            {{ else }}
+            <p class="has-text-centered">You are not in any servers.</p>
+            {{ end }}
+
+        </main>
+    </div>
+</body>
+</html>

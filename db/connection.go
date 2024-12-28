@@ -44,7 +44,8 @@ func Connect() {
 // GetDB returns the database instance.
 func GetDB() *gorm.DB {
 	if DB == nil {
-		log.Fatal("Database connection is not initialized. Call Connect() first.")
+		// Try to connect
+		Connect()
 	}
 	return DB
 }
